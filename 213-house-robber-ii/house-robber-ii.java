@@ -4,18 +4,25 @@ class Solution {
         if(n==0) return 0;
         if(n==1) return nums[0];
         if(n==2) return Math.max(nums[0],nums[1]);
-        return Math.max(solvetab(nums,0,n-2),solvetab(nums,1,n-1));
-    }
-    private int solvetab(int[] nums,int start,int end){
-        int length=end-start+1;
-        int[] dp=new int[length];
-        dp[0]=nums[start];
-        dp[1]=Math.max(nums[start],nums[start+1]);
-        for(int i=2;i<length;i++){
-            int pick=nums[start+i]+dp[i-2];
-            int notpick=dp[i-1];
-            dp[i]=Math.max(pick,notpick);
+
+        int[] dp=new int[3];
+        dp[1]=nums[0];
+        dp[2]=Math.max(nums[0],nums[1]);
+        for(int i=2;i<n-1;i++){
+            dp[0]=dp[1];
+            dp[1]=dp[2];
+            dp[2]=Math.max(nums[i]+dp[0],dp[1]);
         }
-        return dp[length-1];
+        int result=dp[2];
+
+        dp[1]=nums[1];
+        dp[2]=Math.max(nums[1],nums[2]);
+        for(int i=3;i<n;i++){
+            dp[0]=dp[1];
+            dp[1]=dp[2];
+            dp[2]=Math.max(nums[i]+dp[0],dp[1]);
+        }
+        result=Math.max(result,dp[2]);
+        return result;
     }
 }
