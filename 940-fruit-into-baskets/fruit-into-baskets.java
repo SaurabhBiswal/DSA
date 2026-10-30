@@ -1,7 +1,7 @@
 import java.util.HashMap;
 class Solution {
     public int totalFruit(int[] fruits) {
-        int low=0,high=0,maxlen=Integer.MIN_VALUE;
+        int low=0,high=0,maxlen=0;
         HashMap<Integer,Integer> map=new HashMap<>();
         while(high<fruits.length){
             int currentfruit=fruits[high];
